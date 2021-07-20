@@ -1,4 +1,4 @@
-package com.varorest.varorest.lootbox.model;
+package com.varorest.varorest.border.model;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @Entity
 @Table
 @Data
-public class LootBox {
+public class Border {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,15 +33,15 @@ public class LootBox {
     private double z;
 
     @Column
-    private boolean opened;
+    private double radius;
 
     @Builder
-    public LootBox(double x, double y, double z, boolean opened) {
+    public Border(double x, double y, double z, double radius) {
         this.x = x;
         this.y = y;
         this.z = z;
-        this.opened = opened;
+        this.radius = radius;
     }
 
-    public LootBox() { }
+    public Border() { }
 }
