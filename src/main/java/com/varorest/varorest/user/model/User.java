@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,7 +18,7 @@ import java.util.List;
 
 @Entity
 @Table
-@Data
+@Getter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class User {
 
@@ -70,5 +71,9 @@ public class User {
         this.x = x;
         this.y = y;
         this.z = z;
+    }
+
+    public boolean isAlive() {
+        return alive;
     }
 }
