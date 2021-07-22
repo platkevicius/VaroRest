@@ -2,7 +2,6 @@ package com.varorest.varorest.user.model;
 
 import lombok.AccessLevel;
 import lombok.Builder;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import java.sql.Time;
 import java.util.List;
 
@@ -58,9 +56,6 @@ public class User {
     @OneToOne(mappedBy = "member2")
     private UserTeam member2;
 
-    @Transient
-    private int kills;
-
     public User() { }
 
     @Builder
@@ -75,5 +70,25 @@ public class User {
 
     public boolean isAlive() {
         return alive;
+    }
+
+    public Time getLastLogging() {
+        return lastLogging;
+    }
+
+    public boolean isOnline() {
+        return online;
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public double getZ() {
+        return z;
     }
 }

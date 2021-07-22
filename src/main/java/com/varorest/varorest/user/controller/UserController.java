@@ -1,6 +1,8 @@
 package com.varorest.varorest.user.controller;
 
+import com.varorest.varorest.user.dto.LocationDto;
 import com.varorest.varorest.user.model.User;
+import com.varorest.varorest.user.model.UserTeam;
 import com.varorest.varorest.user.services.UserService;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -43,6 +46,9 @@ public class UserController {
         return new ResponseEntity<>(alive.get(), HttpStatus.OK);
     }
 
+    @ApiResponse(
+            description = "Endpoint for retrieving the number of kills, that a player currently possesses"
+    )
     @GetMapping("/kills")
     @ResponseBody
     public ResponseEntity<Integer> getKills(@RequestBody User user) {
@@ -52,6 +58,34 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
         return new ResponseEntity<>(kills.get(), HttpStatus.OK);
+    }
+
+    @ApiResponse(
+            description = "Endpoint for retrieving the location of a player"
+    )
+    @GetMapping("/location")
+    @ResponseBody
+    public ResponseEntity<LocationDto> getLocation(@RequestParam String uuid) {
+        Optional<LocationDto> location = userService.getPlayerLocation(uuid);
+
+        if (location.isEmpty())
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+        return new ResponseEntity<>(location.get(), HttpStatus.OK);
+    }
+
+    @ApiResponse(
+            description = "Endpoint for retrieving a list of all teams and their respective members"
+    )
+    @GetMapping("/teams")
+    @ResponseBody
+    public ResponseEntity<List<UserTeam>> getTeams() {
+        Optional<List<UserTeam>> teams = userService.getAllTeams();
+
+        if (teams.isEmpty())
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+        return new ResponseEntity<>(teams.get(), HttpStatus.OK);
     }
 
 }
