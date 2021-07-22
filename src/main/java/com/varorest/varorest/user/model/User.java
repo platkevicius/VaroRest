@@ -23,7 +23,6 @@ public class User {
     @Id
     @EqualsAndHashCode.Include
     @Setter(AccessLevel.NONE)
-    @Column
     private String uuid;
 
     @Column

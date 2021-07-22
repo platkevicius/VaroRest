@@ -15,13 +15,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class UserKills {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
-    @EqualsAndHashCode.Include
     private Long id;
 
     @ManyToOne(cascade = CascadeType.ALL)

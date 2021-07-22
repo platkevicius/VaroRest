@@ -19,7 +19,6 @@ public class Border {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     @Setter(AccessLevel.NONE)
     private Long id;
 

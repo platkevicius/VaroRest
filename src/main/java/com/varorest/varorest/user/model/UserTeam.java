@@ -15,7 +15,6 @@ public class UserTeam {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     private Long id;
 
     @OneToOne
