@@ -10,11 +10,13 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-class UserKillsRepositoryTest {
+public class UserKillsRepositoryTest {
 
     @Autowired
     private TestEntityManager testEntityManager;
@@ -39,8 +41,10 @@ class UserKillsRepositoryTest {
         testEntityManager.flush();
 
         // when
+        List<UserKills> userKills = userKillsRepository.findUserKillsByKiller(killer);
 
         // then
+        assertEquals(2, userKills.size());
     }
 
 }
