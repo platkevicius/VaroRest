@@ -55,10 +55,12 @@ public class User {
     @OneToOne(mappedBy = "member2")
     private UserTeam member2;
 
-    public User() { }
+    public User() {
+    }
 
     @Builder
-    public User(boolean alive, Time lastLogging, boolean online, double x, double y, double z) {
+    public User(String uuid, boolean alive, Time lastLogging, boolean online, double x, double y, double z) {
+        this.uuid = uuid;
         this.alive = alive;
         this.lastLogging = lastLogging;
         this.online = online;
