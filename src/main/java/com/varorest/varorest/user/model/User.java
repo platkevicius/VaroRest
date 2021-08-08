@@ -17,11 +17,10 @@ import java.util.List;
 @Entity
 @Table
 @Getter
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode
 public class User {
 
     @Id
-    @EqualsAndHashCode.Include
     @Setter(AccessLevel.NONE)
     private String uuid;
 

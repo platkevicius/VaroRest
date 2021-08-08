@@ -1,6 +1,7 @@
 package com.varorest.varorest.user.model;
 
 import lombok.Builder;
+import lombok.Getter;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,6 +16,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Team")
 @Builder
+@Getter
 public class UserTeam {
 
     @Id

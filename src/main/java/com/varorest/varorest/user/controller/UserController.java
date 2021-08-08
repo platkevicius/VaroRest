@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,7 +50,7 @@ public class UserController {
     @ApiResponse(
             description = "Endpoint for retrieving the number of kills, that a player currently possesses"
     )
-    @GetMapping("/kills")
+    @PostMapping("/kills")
     @ResponseBody
     public ResponseEntity<Integer> getKills(@RequestBody User user) {
         Optional<Integer> kills = userService.getKills(user);
@@ -67,7 +68,6 @@ public class UserController {
     @ResponseBody
     public ResponseEntity<LocationDto> getLocation(@RequestParam String uuid) {
         Optional<LocationDto> location = userService.getPlayerLocation(uuid);
-
         if (location.isEmpty())
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
