@@ -41,7 +41,7 @@ public class UserKillsRepositoryTest {
         testEntityManager.flush();
 
         // when
-        List<UserKills> userKills = userKillsRepository.findUserKillsByKiller(killer);
+        List<UserKills> userKills = userKillsRepository.findUserKillsByKiller_Uuid(killer.getUuid());
 
         // then
         assertEquals(2, userKills.size());

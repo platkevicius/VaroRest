@@ -1,7 +1,9 @@
 package com.varorest.varorest.user.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -17,6 +19,8 @@ import javax.persistence.Table;
 @Entity
 @Table
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserKills {
 
     @Id

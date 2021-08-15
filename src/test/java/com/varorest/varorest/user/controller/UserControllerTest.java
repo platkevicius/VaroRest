@@ -60,10 +60,10 @@ public class UserControllerTest {
 
         ObjectMapper objectMapper = new ObjectMapper();
 
-        Mockito.when(userService.getKills(killer)).thenReturn(Optional.of(kills));
+        Mockito.when(userService.getKills(killer.getUuid())).thenReturn(Optional.of(kills));
 
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/api/user/kills").contentType(MediaType.APPLICATION_JSON)
-                                     .content(objectMapper.writeValueAsString(killer)))
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/api/user/kills?uuid=test").contentType(MediaType.APPLICATION_JSON)
+                                     )
                                      .andExpect(MockMvcResultMatchers.status().isOk())
                                      .andReturn();
 

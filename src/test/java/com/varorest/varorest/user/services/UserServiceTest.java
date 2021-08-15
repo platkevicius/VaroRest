@@ -124,10 +124,10 @@ public class UserServiceTest {
         List<UserKills> kills = List.of(kill1, kill2, kill3, kill4);
 
         // when
-        Mockito.when(userKillsRepository.findUserKillsByKiller(user)).thenReturn(kills);
+        Mockito.when(userKillsRepository.findUserKillsByKiller_Uuid(user.getUuid())).thenReturn(kills);
 
         // then
-        assertEquals(expected, userService.getKills(user).orElseThrow(() -> new EntityNotFoundException("Not found Kills")));
+        assertEquals(expected, userService.getKills(user.getUuid()).orElseThrow(() -> new EntityNotFoundException("Not found Kills")));
     }
 
 }

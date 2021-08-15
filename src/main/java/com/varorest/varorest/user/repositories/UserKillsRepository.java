@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface UserKillsRepository extends JpaRepository<UserKills, Long> {
 
-    List<UserKills> findUserKillsByKiller(User killer);
+    List<UserKills> findUserKillsByKiller_Uuid(String killer);
 
 }

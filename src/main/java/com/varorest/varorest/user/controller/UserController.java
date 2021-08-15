@@ -1,6 +1,7 @@
 package com.varorest.varorest.user.controller;
 
 import com.varorest.varorest.user.dto.LocationDto;
+import com.varorest.varorest.user.dto.UserStat;
 import com.varorest.varorest.user.model.User;
 import com.varorest.varorest.user.model.UserTeam;
 import com.varorest.varorest.user.services.UserService;
@@ -52,13 +53,31 @@ public class UserController {
     )
     @PostMapping("/kills")
     @ResponseBody
-    public ResponseEntity<Integer> getKills(@RequestBody User user) {
-        Optional<Integer> kills = userService.getKills(user);
+    public ResponseEntity<Integer> getKills(@RequestParam String uuid) {
+        Optional<Integer> kills = userService.getKills(uuid);
 
         if (kills.isEmpty())
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
         return new ResponseEntity<>(kills.get(), HttpStatus.OK);
+    }
+
+    @ApiResponse(
+            description = "Endpoint for retrieving the number of kills, that a player currently possesses"
+    )
+    @GetMapping("/stats")
+    @ResponseBody
+    public ResponseEntity<List<UserStat>> getStats() {
+        return new ResponseEntity<>(userService.getUserStats(), HttpStatus.OK);
+    }
+
+    @ApiResponse(
+            description = "Endpoint for retrieving the number of kills, that a player currently possesses"
+    )
+    @GetMapping
+    @ResponseBody
+    public ResponseEntity<List<String>> getUsers() {
+        return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
     }
 
     @ApiResponse(
