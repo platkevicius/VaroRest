@@ -52,8 +52,7 @@ public class UserService {
                 continue;
 
             stats.add(UserStat.builder()
-                       //TODO: update this
-                      .name("ADD THIS TO THE DATABASE")
+                      .name(user.getName())
                       .kills(kills.get())
                       .alive(alive.get())
                       .build());
