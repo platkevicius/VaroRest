@@ -1,5 +1,8 @@
 package com.varorest.varorest.user.services;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.varorest.varorest.user.dto.LocationDto;
 import com.varorest.varorest.user.dto.UserStat;
 import com.varorest.varorest.user.model.User;
@@ -9,7 +12,9 @@ import com.varorest.varorest.user.repositories.UserKillsRepository;
 import com.varorest.varorest.user.repositories.UserRepository;
 import com.varorest.varorest.user.repositories.UserTeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,15 +49,32 @@ public class UserService {
         List<User> allUsers = userRepository.findAll();
         List<UserStat> stats = new ArrayList<>();
 
+        RestTemplate restTemplate = new RestTemplate();
+        String preUrl = "https://api.mojang.com/user/profiles/";
+        String afterUrl = "/names";
+        String url;
+
+        ObjectMapper objectMapper = new ObjectMapper();
         for (User user : allUsers) {
             Optional<Boolean> alive = isAlive(user.getUuid());
             Optional<Integer> kills = getKills(user.getUuid());
 
-            if (alive.isEmpty() || kills.isEmpty())
-                continue;
+            if (alive.isEmpty() || kills.isEmpty()) {continue;}
+
+            url = preUrl + user.getUuid() + afterUrl;
+            String userName = "";
+
+            ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
+            try {
+                JsonNode root = objectMapper.readTree(response.getBody());
+                userName = root.get(root.size()-1).get("name").asText();
+            }
+            catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
 
             stats.add(UserStat.builder()
-                      .name(user.getName())
+                      .name(userName)
                       .kills(kills.get())
                       .alive(alive.get())
                       .build());

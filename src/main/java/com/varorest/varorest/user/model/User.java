@@ -25,9 +25,6 @@ public class User {
     private String uuid;
 
     @Column
-    private String name;
-
-    @Column
     private boolean alive;
 
     @Column
@@ -61,9 +58,8 @@ public class User {
     }
 
     @Builder
-    public User(String uuid, String name, boolean alive, Time lastLogging, boolean online, double x, double y, double z) {
+    public User(String uuid, boolean alive, Time lastLogging, boolean online, double x, double y, double z) {
         this.uuid = uuid;
-        this.name = name;
         this.alive = alive;
         this.lastLogging = lastLogging;
         this.online = online;
@@ -83,8 +79,6 @@ public class User {
     public boolean isOnline() {
         return online;
     }
-
-    public String getName() { return name; }
 
     public double getX() {
         return x;
