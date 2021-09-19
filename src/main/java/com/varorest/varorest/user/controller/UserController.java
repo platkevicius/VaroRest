@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -106,5 +105,18 @@ public class UserController {
 
         return new ResponseEntity<>(teams.get(), HttpStatus.OK);
     }
+
+    @ApiResponse(
+            description = "Endpoint for retrieving a list of all teams and their respective members"
+    )
+    @GetMapping("/locations")
+    @ResponseBody
+    public ResponseEntity<List<User>> getLocations() {
+        List<User> locations = userService.getLocations();
+
+        return new ResponseEntity<>(locations, HttpStatus.OK);
+    }
+
+
 
 }

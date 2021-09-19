@@ -16,6 +16,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -109,5 +112,16 @@ public class UserService {
 
     public List<String> getAllUsers() {
         return userRepository.findAll().stream().map(User::getUuid).collect(Collectors.toList());
+    }
+
+    public List<User> getLocations() {
+        return userRepository.findAll()
+                .stream()
+                .filter((user) -> {
+                    LocalDateTime lastLogging = user.getLastLogging().plusDays(4L);
+
+                    return lastLogging.isAfter(LocalDateTime.now());
+                })
+                .collect(Collectors.toList());
     }
 }

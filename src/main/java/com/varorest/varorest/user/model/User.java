@@ -12,6 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.sql.Time;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -28,7 +29,7 @@ public class User {
     private boolean alive;
 
     @Column
-    private Time lastLogging;
+    private LocalDateTime lastLogging;
 
     @Column
     private boolean online;
@@ -58,7 +59,7 @@ public class User {
     }
 
     @Builder
-    public User(String uuid, boolean alive, Time lastLogging, boolean online, double x, double y, double z) {
+    public User(String uuid, boolean alive, LocalDateTime lastLogging, boolean online, double x, double y, double z) {
         this.uuid = uuid;
         this.alive = alive;
         this.lastLogging = lastLogging;
@@ -72,7 +73,7 @@ public class User {
         return alive;
     }
 
-    public Time getLastLogging() {
+    public LocalDateTime getLastLogging() {
         return lastLogging;
     }
 
