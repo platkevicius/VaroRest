@@ -3,6 +3,7 @@ package com.varorest.varorest.user.controller;
 import com.varorest.varorest.user.dto.LocationDto;
 import com.varorest.varorest.user.dto.UserStat;
 import com.varorest.varorest.user.model.User;
+import com.varorest.varorest.user.model.UserLocationResponse;
 import com.varorest.varorest.user.model.UserTeam;
 import com.varorest.varorest.user.services.UserService;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -111,8 +112,8 @@ public class UserController {
     )
     @GetMapping("/locations")
     @ResponseBody
-    public ResponseEntity<List<User>> getLocations() {
-        List<User> locations = userService.getLocations();
+    public ResponseEntity<List<UserLocationResponse>> getLocations() {
+        List<UserLocationResponse> locations = userService.getLocations();
 
         return new ResponseEntity<>(locations, HttpStatus.OK);
     }
