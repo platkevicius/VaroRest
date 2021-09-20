@@ -120,7 +120,7 @@ public class UserService {
                 .filter((user) -> {
                     LocalDateTime lastLogging = user.getLastLogging().plusDays(4L);
 
-                    return lastLogging.isAfter(LocalDateTime.now());
+                    return lastLogging.isBefore(LocalDateTime.now());
                 })
                 .collect(Collectors.toList());
     }

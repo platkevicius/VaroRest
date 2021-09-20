@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class LootBoxService {
@@ -24,7 +25,9 @@ public class LootBoxService {
         if (lootBoxes.isEmpty())
             return Optional.empty();
 
-        return Optional.of(lootBoxes);
+        return Optional.of(lootBoxes.stream()
+            .filter(LootBox::isCreated)
+            .collect(Collectors.toList()));
     }
 
 }

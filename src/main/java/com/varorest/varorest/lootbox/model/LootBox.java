@@ -34,6 +34,9 @@ public class LootBox {
     @Column
     private boolean opened;
 
+    @Column
+    private boolean created;
+
     @Builder
     public LootBox(double x, double y, double z, boolean opened) {
         this.x = x;

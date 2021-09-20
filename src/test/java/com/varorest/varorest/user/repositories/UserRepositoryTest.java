@@ -9,6 +9,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.sql.Time;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -32,7 +33,7 @@ public class UserRepositoryTest {
                     .x(40)
                     .y(40)
                     .z(40)
-                    .lastLogging(Time.valueOf(LocalTime.of(2, 2)))
+                    .lastLogging(LocalDateTime.of(1, 1, 1,2, 2))
                     .build();
         entityManager.persist(expected);
         entityManager.flush();
